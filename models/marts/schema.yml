@@ -1,0 +1,50 @@
+version: 2
+
+models:
+  - name: fact_leaderboard
+    description: "Union of all daily rating snapshots for blitz, rapid, and bullet"
+    columns:
+      - name: username
+        description: "Lichess username"
+        tests:
+          - not_null
+      - name: rank
+        description: "Leaderboard rank (1-100)"
+        tests:
+          - not_null
+      - name: rating
+        description: "Current rating in the given performance mode"
+        tests:
+          - not_null
+      - name: performance
+        description: "Game mode (blitz, rapid, bullet)"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['blitz', 'rapid', 'bullet']
+      - name: snapshot_date
+        description: "Date of the snapshot (YYYY-MM-DD)"
+        tests:
+          - not_null
+
+  - name: dim_player
+    description: "Player dimension with first and last seen dates and number of days tracked"
+    columns:
+      - name: username
+        description: "Lichess username"
+        tests:
+          - unique
+          - not_null
+      - name: first_seen
+        description: "Earliest snapshot date the player appeared"
+        tests:
+          - not_null
+      - name: last_seen
+        description: "Latest snapshot date the player appeared"
+        tests:
+          - not_null
+      - name: days_tracked
+        description: "Number of distinct days the player appeared in the leaderboard"
+        tests:
+          - not_null
