@@ -50,7 +50,7 @@ A production‑grade, serverless data pipeline that tracks daily rating movement
 
 ## 📦 Dataset
 
-- **Source:** Raw JSON files are produced by a separate daily ingestion pipeline ([Lichess Rating Tracker](https://github.com/your-username/lichess-rating-tracker)), which fetches top 100 players (blitz, rapid, bullet) from the Lichess API and stores them in S3.
+- **Source:** Raw JSON files are produced via a daily ingestion pipeline from a separate project ([Lichess-Chess-Lake](https://github.com/ibrahimincognito/Chess-Data-Lake/tree/main)), which fetches top 100 players (blitz, rapid, bullet) from the Lichess API and stores them in S3.
 - **Data range:** 2026‑02‑08 to 2026‑02‑20 (13 days).
 - **Raw files:** 13 JSON files per mode, each containing 100 player objects.
 - **Dynamic views:** Each Databricks view reads all files for its mode, providing 1300 rows (13 × 100).
