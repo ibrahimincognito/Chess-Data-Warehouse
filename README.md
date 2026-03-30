@@ -1,7 +1,5 @@
 # Lichess Data Warehouse: Automated ELT with Databricks, dbt, and AWS
 
-![Architecture](architecture/pipeline-diagram.png)
-
 ## 📊 Project Overview
 
 A production‑grade, serverless data pipeline that tracks daily rating movements of top Lichess chess players. The pipeline ingests raw JSON data from an AWS S3 data lake, builds a star‑schema warehouse on Databricks using dbt, and automates transformations, testing, and documentation. All resources run within free tiers, making it a zero‑cost, fully functional portfolio project.
@@ -19,7 +17,9 @@ A production‑grade, serverless data pipeline that tracks daily rating movement
 
 ## 🏗️ Architecture
 
-![Architecture Diagram](architecture/pipeline-diagram.png)
+<p align="center">
+  <img src="architecture/lichess-data-warehouse-flow.png" width="900">
+</p>
 
 1. **AWS Lambda** (Project 1) fetches the top 100 players (blitz, rapid, bullet) daily and stores raw JSON in S3 at `s3://lichess-raw-data-ibrahim/raw/leaderboard/YYYY-MM-DD/{mode}.json`.
 2. **Databricks External Location** securely connects to S3, enabling direct file access.
@@ -128,6 +128,17 @@ GROUP BY username
 - A scheduled dbt Cloud job runs `dbt run` and `dbt test` every day at 00:30 UTC.
 - New files from the daily Lambda are automatically picked up by the Databricks views, so the dbt run refreshes the warehouse with the latest data.
 
+The [docs/screenshots/](docs/screenshots/) folder contains visual proof of the working pipeline, including:
+- Databricks external location configuration
+- Raw views with row counts
+- dbt project structure
+- dbt documentation lineage graph and model details
+- Successful `dbt test` output
+- Queries against the final fact and dimension tables
+- Scheduled dbt Cloud job configuration and a successful run history
+
+These screenshots demonstrate that the pipeline is fully functional and automated.
+
 ## How to Reproduce
 
 ## Prerequisites
@@ -207,7 +218,7 @@ All services used are within free tiers:
 - Trigger the dbt Cloud job directly from the S3 upload event (via Databricks API) for near‑real‑time updates.
 
 ## Acknowledgements
-- Lichess API for provide free, open chess data.
+- [Lichess Public API](https://lichess.org/api) for provide free, open chess data.
 - dbt Labs for an incredible transformation tool.
 - Databricks for the free learning edition.
 
