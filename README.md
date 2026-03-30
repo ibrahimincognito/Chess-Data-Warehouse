@@ -1,6 +1,6 @@
 # Lichess Data Warehouse: Automated ELT with Databricks, dbt, and AWS
 
-## 📊 Project Overview
+## Project Overview
 
 A production‑grade, serverless data pipeline that tracks daily rating movements of top Lichess chess players. The pipeline ingests raw JSON data from an AWS S3 data lake, builds a star‑schema warehouse on Databricks using dbt, and automates transformations, testing, and documentation. All resources run within free tiers, making it a zero‑cost, fully functional portfolio project.
 
@@ -15,7 +15,7 @@ A production‑grade, serverless data pipeline that tracks daily rating movement
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 <p align="center">
   <img src="architecture/lichess-data-warehouse-flow.png" width="900">
@@ -34,7 +34,7 @@ A production‑grade, serverless data pipeline that tracks daily rating movement
 
 ---
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 | Tool | Purpose |
 |------|---------|
@@ -48,7 +48,7 @@ A production‑grade, serverless data pipeline that tracks daily rating movement
 
 ---
 
-## 📦 Dataset
+## Dataset
 
 - **Source:** Raw JSON files are produced via a daily ingestion pipeline from a separate project ([Lichess-Chess-Lake](https://github.com/ibrahimincognito/Chess-Data-Lake/tree/main)), which fetches top 100 players (blitz, rapid, bullet) from the [Lichess Public API](https://lichess.org/api) and stores them in S3.
 - **Data range:** 2026‑02‑08 to 2026‑02‑20 (13 days).
@@ -59,7 +59,7 @@ A production‑grade, serverless data pipeline that tracks daily rating movement
 
 ---
 
-## 🔄 Pipeline Steps
+## Pipeline Steps
 
 ### 1. Ingestion (AWS Lambda)
 - Daily fetch of top 100 players per mode.
@@ -137,7 +137,7 @@ The [docs/screenshots/](docs/screenshots/) folder contains visual proof of the w
 
 These screenshots demonstrate that the pipeline is fully functional and automated.
 
-## How to Reproduce
+## Reproducibilty Guide
 
 ## Prerequisites
 - AWS account with S3 bucket containing the Lichess JSON files.
@@ -188,7 +188,7 @@ LIMIT 10;
 ```
 
 ## Cost Analysis:
-## 💰 Cost Analysis
+## Cost Analysis
 
 All services used are within free tiers:
 
