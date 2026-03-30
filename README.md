@@ -139,12 +139,12 @@ These screenshots demonstrate that the pipeline is fully functional and automate
 
 ## Reproducibilty Guide
 
-## Prerequisites
+### Prerequisites
 - AWS account with S3 bucket containing the Lichess JSON files.
 - Databricks workspace (Free Edition).
 - dbt Cloud account (Developer tier).
 
-## Steps
+### Steps
 1. Set up Databricks External Location pointing to your S3 bucket (see documentation in repo).
 2. Create the dynamic views in Databricks using the SQL scripts in the `databricks/` folder (or run the provided queries).
 3. Clone this repository and copy `profiles.yml.example` to `profiles.yml` (fill in your Databricks credentials).
