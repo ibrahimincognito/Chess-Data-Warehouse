@@ -1,0 +1,11 @@
+lichess_analytics:
+  target: dev
+  outputs:
+    dev:
+      type: databricks
+      host: <your-workspace-url>
+      http_path: <your-http-path>
+      token: <your-personal-token>
+      catalog: workspace # Use `database: workspace` if `catalog: workspace` doesn't work
+      schema: dbt_analytics
+      threads: 4
