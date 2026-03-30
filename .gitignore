@@ -1,0 +1,17 @@
+# dbt generated files
+target/
+dbt_packages/
+logs/
+.dbt/
+
+# Secrets
+profiles.yml
+
+# Python virtual environment
+venv/
+__pycache__/
+*.pyc
+
+# OS junk
+.DS_Store
+Thumbs.db
