@@ -216,9 +216,9 @@ The dashboard is published within Databricks. Anyone with access to my Databrick
 
 | Visualization | Global Filter |
 |---------------|-------------|
-| ![Bullet Chess Dashboard](docs/screenshots/3.1-bullet-dashboard.png) | Performance: Bullet |
-| ![Blitz Chess Dashboard](docs/screenshots/3.2-blitz-dashboard.png) | Performance: Blitz |
-| ![Rapid Chess Dashboard](docs/screenshots/3.3-rapid-dasboard.png) | Performance: Rapid |
+| Performance: Bullet | ![Bullet Chess Dashboard](docs/screenshots/3.1-bullet-dashboard.png) |
+| Performance: Blitz | ![Blitz Chess Dashboard](docs/screenshots/3.2-blitz-dashboard.png) |
+| Performance: Rapid | ![Rapid Chess Dashboard](docs/screenshots/3.3-rapid-dasboard.png) |
 
 
 ### How the Dashboard Was Built
