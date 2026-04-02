@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-A production‑grade, serverless data pipeline that tracks daily rating movements of top Lichess chess players. The pipeline ingests raw JSON data from an AWS S3 data lake, builds a star‑schema warehouse on Databricks using dbt, and automates transformations, testing, and documentation. All resources run within free tiers, making it a zero‑cost, fully functional portfolio project.
+A production‑grade, serverless data pipeline that tracks daily rating movements of top Lichess chess players. The pipeline ingests raw JSON data from an AWS S3 data lake, builds a star‑schema warehouse on Databricks using dbt, and automates transformations, testing, and documentation. Finally, an interactive dashboard built with Databricks AI/BI visualizes key insights. All resources run within free tiers, making it a zero‑cost, fully functional portfolio project.
 
 **Key Features:**
 - **Serverless & Cost‑Effective** – AWS Lambda, Databricks Free Edition, dbt Cloud Developer plan.
@@ -12,6 +12,7 @@ A production‑grade, serverless data pipeline that tracks daily rating movement
 - **Data Quality** – Automated tests (`not_null`, `unique`, `accepted_values`) ensure reliability.
 - **Documentation** – Auto‑generated lineage graph and model documentation with `dbt docs`.
 - **CI/CD** – Scheduled dbt Cloud jobs run daily, keeping the warehouse up‑to‑date.
+- - **Interactive Dashboard** – Databricks AI/BI dashboard visualizes rating trends, top gainers, volatility, and player comparisons.
 
 ---
 
@@ -186,6 +187,52 @@ WHERE t.rating - y.rating > 0
 ORDER BY gain DESC
 LIMIT 10;
 ```
+
+## Interactive Dashboard
+
+To make the data actionable, I built an interactive dashboard using **Databricks AI/BI** (formerly Lakeview). The dashboard connects directly to the `dbt_analytics` tables and allows users to explore rating dynamics through several visualizations.
+
+### Dashboard Features
+
+- **Global Filter** – Switch between blitz, rapid, and bullet modes with a single dropdown. All charts update instantly.
+- **Rating Trends** – Line chart showing how the top 5 players' ratings evolve over time (using area chart as equivalent).
+- **Daily Top Gainers** – Bar chart of players who gained the most rating between consecutive days (calculated with a custom SQL field).
+- **Leaderboard Snapshot** – Table of current top 10 players for the selected mode.
+- **Volatility Ranking** – Bar chart of players with highest rating standard deviation (most volatile).
+- **Most Improved Players** – Bar chart of players with the largest overall rating increase from first to last snapshot.
+- **Performance Mode Comparison** – Bar chart comparing average rating across blitz, rapid, and bullet (if global filter is not applied).
+
+### How to Use
+
+1. Select a game mode from the **Performance** filter at the top.
+2. Hover over charts for tooltips with exact values.
+3. The date filter (optional) can be added to narrow down a time range.
+
+### Live Dashboard
+
+The dashboard is published within Databricks. Anyone with access to my Databricks workspace can view [my dashboard here](https://dbc-4cc12a34-99e5.cloud.databricks.com/dashboardsv3/01f12e8bf6bf158ea71cf0518274e44a/published?o=7474659993133875&f_6a74f075%7E7433c46f=_all_&f_6a74f075%7E0b769491=_all_&f_6a74f075%7E47718542=_all_&f_6a74f075%7E9ffc896e=_all_&f_6a74f075%7E21d96d8c=bullet). For external viewers, the dashboard screenshots are provided below.
+
+### Dashboard Screenshots
+
+| Visualization | Global Filter |
+|---------------|-------------|
+| ![Bullet Chess Dashboard](docs/screenshots/3.1-bullet-dashboard.png) | Performance: Bullet |
+| ![Blitz Chess Dashboard](docs/screenshots/3.2-blitz-dashboard.png) | Performance: Blitz |
+| ![Rapid Chess Dashboard](docs/screenshots/3.3-rapid-dasboard.png) | Performance: Rapid |
+
+
+### How the Dashboard Was Built
+
+- **Data Source:** The `workspace.dbt_analytics.fact_leaderboard` and `dim_player` tables (output of the dbt pipeline).
+- **Tool:** Databricks AI/BI Dashboard (free tier).
+- **Key Steps:**
+  1. Created datasets directly from the fact and dimension tables.
+  2. Used the **Custom Calculation** feature to compute `RatingGain` (rating change between consecutive days) and `OverallImprovement`.
+  3. Applied aggregations (standard deviation, average) in the chart configuration.
+  4. Added a global filter on `performance` to make all charts interactive.
+  5. Published the dashboard with **Share data permission** so viewers can see the same data without direct table access.
+
+This dashboard demonstrates how a data warehouse can be turned into actionable insights with minimal additional effort.
 
 ## Cost Analysis:
 ## Cost Analysis
